@@ -37,7 +37,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
--  stage: Deploy
+- stage: Deploy
 jobs:
 - job: Deploy
   pool:
