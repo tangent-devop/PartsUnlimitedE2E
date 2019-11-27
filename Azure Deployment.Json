@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2016-09-01",
+            "name": "franktestplan",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "F1",
+                "capacity": 1
+            },
+            "tags": {
+                "displayName": "franktestplan"
+            },
+            "properties": {
+                "name": "franktestplan"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2015-08-01",
+            "name": "frankdemo1234",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/frankdemoplan')]": "Resource",
+                "displayName": "frankdemo1234"
+            },
+            "dependsOn": [
+                "Microsoft.Web/serverfarms/frankdemoplan"
+            ],
+            "properties": {
+                "name": "frankdemo1234",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', 'frankdemoplan')]"
+            }
+        }
+    ],
+    "outputs": {}
+}
