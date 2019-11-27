@@ -36,3 +36,24 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    pool:
+      name: Hosted VS2017
+    steps:
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'DemoSubscription (e3ee360d-47a8-4d33-8764-fd8d92501c05)'
+        appType: 'webApp'
+        WebAppName: 'pul-jandoe-prod'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
