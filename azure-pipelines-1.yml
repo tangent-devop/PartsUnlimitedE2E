@@ -64,15 +64,15 @@ stages:
 
        - task: AzureResourceManagerTemplateDeployment@3
          inputs:
-               deploymentScope: 'Resource Group'
-               azureResourceManagerConnection: 'DemoSubscription(e3ee360d-47a8-4d33-8764-fd8d92501c05)-tangentsolution'
-               subscriptionId: 'e3ee360d-47a8-4d33-8764-fd8d92501c05'
-               action: 'Create Or Update Resource Group'
-               resourceGroupName: 'eu-tangapp-arm-dev'
-               location: 'East US'
-               templateLocation: 'Linked artifact'
-               csmFile: '''$(System.ArtifactsDirectory)/drop/PartsUnlimited-aspnet45/azuredeployment.json'''
-               deploymentMode: 'Incremental'
+          deploymentScope: 'Resource Group'
+          azureResourceManagerConnection: 'DemoSubscription(e3ee360d-47a8-4d33-8764-fd8d92501c05)-tangentsolution'
+          subscriptionId: 'e3ee360d-47a8-4d33-8764-fd8d92501c05'
+          action: 'Create Or Update Resource Group'
+          resourceGroupName: 'eu-tangapp-arm-dev'
+          location: 'East US'
+          templateLocation: 'Linked artifact'
+          csmFile: '''$(System.ArtifactsDirectory)/drop/PartsUnlimited-aspnet45/azuredeployment.json'''
+          deploymentMode: 'Incremental'
 
        - task: AzureRmWebAppDeployment@4
          inputs:
